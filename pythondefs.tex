@@ -1,0 +1,558 @@
+%This pythondefs.tex to be included in OmJayaGanesa.tex
+
+
+
+
+
+\graphicspath{ {./pythonBookFiles/pythonBookImages/} }
+\DeclareGraphicsExtensions{.png,.pdf.,jpg}
+
+
+
+
+
+\setlist[description]{labelindent=10pt,style=multiline,leftmargin=4cm}
+
+
+
+%%%%%%  Declare Problem Style with Thmtools 
+
+
+\declaretheoremstyle[
+headfont=\small\bfseries,
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont,
+]{probStyle}
+
+\declaretheorem[style=probStyle,name={},numberwithin=chapter]{Prob}
+
+\NewTotalDocumentCounter{totalprobs}
+\DeclareAssociatedCounters{Prob}{totalprobs}
+\renewcommand{\theProb}{\thesection.\arabic{Prob}}
+
+
+
+
+
+\Newassociation{sol}{Soln}{sol}
+
+\renewenvironment{Soln}[1]
+{\par\bigskip\noindent\phantomsection{\bfseries 
+		#1.}\quad}
+{\par}
+
+
+\Newassociation{ans}{Ans}{ans}
+
+\renewenvironment{Ans}[1]
+{\par\bigskip\noindent\phantomsection{\bfseries 
+		#1.}\quad}
+{\par}
+
+
+
+
+
+
+\Newassociation{mysolution}{mySoln}{mysolutions}
+
+% new environment that sets up hypertargets both in the question
+% section, and in the answer section
+\newlist{myenum}{enumerate}{3}
+\newcounter{question}[chapter]
+\renewcommand\thequestion{\arabic{chapter}.\arabic{question}}
+
+\newenvironment{question}%
+{%
+	\refstepcounter{question}%
+	%  hyperlink to solution
+	\hypertarget{question:{\thequestion}}{}%
+	\Writetofile{mysolutions}{\protect\hypertarget{soln:\thequestion}{}}%
+	\begin{myenum}[label=\bfseries\protect\hyperlink{soln:\thequestion}{\thequestion},ref=\thequestion]
+		\item%
+	}%
+	{%
+\end{myenum}}
+
+
+
+
+
+\newlistof{listofprograms}{lol}{List of Programs}
+\newfloat[chapter]{ftprogram}{lol}{Program}
+\newlistentry{ftprogram}{lol}{0}
+
+
+
+
+%%%
+%%\theoremstyle{definition}
+%%\newtheorem{ex}{%
+%%	\hyperlink{ex:\theex}{Exercise}\hypertarget{code:\theex}{}}
+%%\Newassociation{code}{Code}{corr}
+%%\renewenvironment{Code}[1]
+%%{\par\bigskip\noindent{\bfseries \hypertarget{ex:#1}{}\hyperlink{cod:#1}{Code for the exercise #1}}\quad}
+%%%%{\par\bigskip}
+
+
+
+
+
+
+
+
+
+
+
+\usepackage{minted}
+\usepackage{setspace}
+\usepackage[all, minted]{tcolorbox}
+
+\definecolor{bg}{rgb}{0.95,0.95,0.95}
+
+\newminted{python3}{bgcolor=saffron!5,linenos=false, tabsize=4, frame = lines,breaklines}
+\newmintedfile[pyfile]{python3}{bgcolor=saffron!5,linenos=false, tabsize=4, frame = lines,breaklines}
+
+
+
+\usepackage[nameinlink]{cleveref}
+\crefname{ftprogram}{Program}{Programs}
+\crefname{mintedbox}{Program}{Programs}
+
+
+
+
+%Usage begin and end pycode environment {Title}{label}
+\newenvironment{pycode}[2]
+{%
+	\VerbatimEnvironment
+	\def\savedcaption{\caption{#1}}%
+	\def\savedlabel{\label{#2}}%
+	\begin{ftprogram}[ht]%
+		\centering
+	\begin{minipage}[t]{.6\textwidth}%
+		\begin{center}%
+		\begin{python3code}%
+		}
+		{%
+		\end{python3code}%
+		\savedcaption
+		\savedlabel
+	\end{center}%
+\end{minipage}%
+\end{ftprogram}%
+}
+
+%\newcommand{\reverseconcat}[3]{#3#2#1}
+
+
+\newcommand{\pycodefile}[3]{
+	\begin{ftprogram}[H]
+		\centering
+		\begin{minipage}[t]{.6\textwidth}%
+			\inputminted[bgcolor=saffron!5,linenos=false, tabsize=4, frame = lines]{python3}{#3}
+			\caption{#1}
+			\label{#2}
+		\end{minipage}
+	\end{ftprogram}
+}
+
+
+%Python Command for including Code and result image from files \pycoderesultfiles{Title}{label}{filename}
+%\newenvironment{pycodeandresultfiles}[3]
+
+\newcommand{\pycoderesultfiles}[4]{
+	\begin{ftprogram}[H]
+		\centering
+		\begin{minipage}[htb]{.45\linewidth}%
+			\inputminted[bgcolor=saffron!5,linenos=false, tabsize=4, frame = lines]{python3}{#3}
+			\end{minipage}\hfill%
+	\begin{minipage}[htb]{.45\linewidth}%
+		\includegraphics[width=\textwidth]{#4}
+	\end{minipage}
+	\caption{#1}%
+	\label{#2}%
+	\end{ftprogram}
+}
+
+
+
+%\centering
+%\begin{minipage}[b]{0.45\linewidth}
+%	\includegraphics...\caption{Happy Smiley}
+%	\label{fig:minipage1}
+%\end{minipage}\quad
+%\begin{minipage}[b]{0.45\linewidth}
+%	\includegraphics...
+%	\caption{Sad Smiley}
+%	\label{fig:minipage2}
+%\end{minipage}
+
+
+
+%\begin{figure}[h]
+%	\begin{center}
+%		\includegraphics[width=0.8\textwidth]{pythonBookFiles/images/intro/ubuntuinstall}
+%		\caption{Installed versions of Python and Pip in Ubuntu 20.04 }
+%		\label{ubuntuinstall}
+%	\end{center}
+%\end{figure}
+
+
+
+
+
+
+
+%%Usage begin and end pycode environment {Title}{label}{filename}
+%\newenvironment{pycodeandresultfiles}[3]
+%{%
+%	\VerbatimEnvironment
+%	\def\savedcaption{\caption{#1}}%
+%	\def\savedlabel{\label{#2}}%
+%	\def\resultimage{\}
+%	\begin{ftprogram}[ht]%
+%		\centering
+%		\begin{minipage}[t]{.45\textwidth}%
+%			\begin{center}%
+%				\begin{python3code}%
+%				}
+%				{%
+%				\end{python3code}%
+%				\savedcaption
+%				\savedlabel
+%			\end{center}%
+%		\end{minipage}%
+%	\end{ftprogram}%
+%}
+
+
+
+
+
+
+%Summary environment for explaining the points explained till now.
+
+\newtcolorbox[auto counter, number within=chapter]{summary}[1][]{
+	enhanced,
+	breakable,
+	left=0.5em, right=0pt, top=5pt, bottom=5pt,    
+	attach boxed title to top left={yshift=-\tcboxedtitleheight},
+	boxed title style={%
+		empty,
+		right=0pt,
+		frame code={\draw[line width=2pt, saffron!50] (frame.north west)--(frame.north east);}},
+	before upper=\hspace{\tcboxedtitlewidth},
+	colbacktitle=white,
+	coltitle={black},
+	colback={white},
+	fonttitle={\bfseries},
+	title={{\bfseries Summary \thetcbcounter #1 }},                
+	lower separated=false,
+	sharp corners,
+	frame hidden,
+	boxrule=0pt,
+	width=0.8\textwidth,
+	boxsep=10pt,
+	borderline west={1pt}{0pt}{saffron},
+	overlay unbroken and last={%
+		\draw[line width=2pt, saffron!50] (frame.south west)   -- ++(0:1cm);},
+	#1
+}
+
+
+% Usage Project environment with Project{title}{label}
+
+\newtcbtheorem[auto counter, number within = chapter,crefname={project}{projects}]{project}{Project}{
+	lower separated=true,
+	colback=white!90!saffron,
+	colframe=white,
+	colbacktitle=white!80!saffron,
+	coltitle=black,
+	enhanced,
+	boxed title style={colframe=white!80!saffron},
+	attach boxed title to top left={yshift*=-\tcboxedtitleheight/2, xshift=.5cm},
+}{def}
+
+
+
+
+
+
+%Usage of this environment 
+%\begin{mintedbox}[minted options]{language}[tcolorbox options]
+
+\DeclareTCBListing{mintedbox}{mm}{%
+	listing only,
+	breakable,
+	minted language=python,
+	minted options={%
+		linenos,
+		numbersep=5pt,
+		gobble=0,
+		tabsize=4,
+		breaklines=true,
+		mathescape,
+		framesep=2mm},
+	% Appearance tweaks
+	top=0pt,
+	bottom=0pt,
+	left=0pt,
+	right=0pt,
+	arc=0pt,
+	colframe=orange,
+	colback=bg,
+	coltitle=black,
+	title=#1,
+	label=#2}
+%}
+
+
+% Code for TCB tip box 
+
+\newtcolorbox[auto counter]{tipbox}{
+	breakable,
+	freelance,
+	colback=white,
+	colframe=saffron!30,
+	frame code={},
+	overlay unbroken={
+		\fill[rounded corners=8pt,saffron!30]
+		(title.south west) --
+		(title.south) -- 
+		([yshift=20pt]title.south) --
+		([yshift=20pt,xshift=4cm]title.south) --
+		([xshift=4cm]title.south) --
+		(title.south east) {[sharp corners] --
+			([yshift=-6pt]title.south east) -- 
+			([yshift=-6pt]title.south west) } -- cycle;
+		\draw[rounded corners=8pt,saffron,line width=1pt]
+		(title.west|-frame.south west) --
+		(title.south west) --
+		(title.south) -- 
+		([yshift=20pt]title.south) --
+		([yshift=20pt,xshift=4cm]title.south) --
+		([xshift=4cm]title.south) --
+		(title.south east) --
+		(title.east|-frame.south east) --
+		cycle;
+		\node at ([xshift=2cm,yshift=4pt,font=]title.south) 
+		{\Large Tip~\thetcbcounter};  
+	}, 
+	overlay first={
+		\fill[rounded corners=8pt,saffron!30]
+		(title.south west) --
+		(title.south) -- 
+		([yshift=20pt]title.south) --
+		([yshift=20pt,xshift=4cm]title.south) --
+		([xshift=4cm]title.south) --
+		(title.south east) {[sharp corners] --
+			([yshift=-6pt]title.south east) -- 
+			([yshift=-6pt]title.south west) } -- cycle;
+		\draw[rounded corners=8pt,saffron,line width=1pt]
+		(title.west|-frame.south) --
+		(title.south west) --
+		(title.south) -- 
+		([yshift=20pt]title.south) --
+		([yshift=20pt,xshift=4cm]title.south) --
+		([xshift=4cm]title.south) --
+		(title.south east) --
+		(title.south east|-frame.south);
+		\node at ([xshift=2cm,yshift=4pt,font=]title.south) 
+		{\Large Tip~\thetcbcounter};  
+	},
+	overlay middle={
+		\draw[rounded corners=8pt,saffron,line width=1pt]
+		(title.west|-frame.south) --
+		(title.west|-frame.north);
+		\draw[rounded corners=8pt,saffron,line width=1pt]
+		(title.east|-frame.south) --
+		(title.east|-frame.north);
+	},
+	overlay last={
+		\draw[rounded corners=8pt,saffron,line width=1pt]
+		(title.west|-frame.north) --
+		(title.west|-frame.south) --
+		(title.east|-frame.south) --
+		(title.east|-frame.north);
+	},
+	title={\mbox{}},
+	top=12pt,
+	fontupper=\Large,
+	oversize=0.5cm,
+	before={\vskip28pt\par\noindent},
+	after={\par\vskip12pt},
+}
+
+
+
+
+%Code for mytheorem 
+\definecolor{myblue}{RGB}{0,163,243}
+
+\newtcolorbox[auto counter,number within=section]{mytheorem}[1][]{
+	enhanced jigsaw,colback=white,colframe=myblue,coltitle=myblue,
+	fonttitle=\bfseries\sffamily,
+	sharp corners,
+	detach title,
+	leftrule=22mm,
+	underlay unbroken and first={\node[below,text=white,font=\sffamily\bfseries,align=center]
+		at ([xshift=-11mm,yshift=-1mm]interior.north west) {THEOREM\\\thetcbcounter};},
+	breakable,pad at break=1mm,
+	#1,
+	code={\ifdefempty{\tcbtitletext}{}{\tcbset{before upper={\tcbtitle\par\medskip}}}},
+}
+
+%Concept environment with usage \begin{concept}{title}{label}
+
+\newcounter{concept}[chapter]
+\renewcommand\theconcept{\arabic{chapter}.\arabic{concept}}
+
+
+\makeatletter
+\def\mdf@mytitle{}
+\define@key{mdf}{mytitle}{%
+	\def\mdf@mytitle{#1}}
+
+\mdf@do@stringoption{digressiontitle=={Digression}}
+
+\tikzset{
+	excursus line/.style={%
+		line width=2pt,
+		draw=saffron,
+		rounded corners=2ex,
+	},
+	excursus head/.style={%
+		fill=white,
+		font=\bfseries,
+		text=blue!80,
+		anchor=base west,
+	},
+}
+\mdfdefinestyle{digressionarrows}{%
+	extra={\stepcounter{concept}},%
+	singleextra={%
+		\path let \p1=(P), \p2=(O) in (\x2,\y1) coordinate (Q);
+		\path let \p1=(Q), \p2=(O) in (\x1,{(\y1-\y2)/2}) coordinate (M);
+		\path [excursus line]
+		($(O)+(5em,0ex)$) -| (M) |- %
+		($(Q)+(30em,0ex)$);
+		%\node at ($(M)$) {M};
+		%\node [excursus head] at ($(Q)+(2.5em,-0.75pt)$) {Digression};},
+		\ifx\empty\mdf@mytitle\empty
+		\node [excursus head] at ($(Q)+(2.5em,-0.75pt)$) {\mdf@digressiontitle~\theconcept};
+		\else
+		\node [excursus head] at ($(Q)+(2.5em,-0.75pt)$) {\mdf@digressiontitle~\theconcept\space: \space\mdf@mytitle};
+		\fi},
+	firstextra={%
+		\path let \p1=(P), \p2=(O) in (\x2,\y1) coordinate (Q);
+		\path [excursus arrow,-to]
+		(O) |- %
+		($(Q)+(12em,0ex)$) .. controls +(0:16em) and +(185:6em) .. %
+		++(23em,2ex);
+		%\node [excursus head] at ($(Q)+(2.5em,-2pt)$) {Digression};},
+		\ifx\empty\mdf@mytitle\empty
+		\node [excursus head] at ($(Q)+(2.5em,-0.75pt)$) {\mdf@digressiontitle~\theconcept};
+		\else
+		\node [excursus head] at ($(Q)+(2.5em,-0.75pt)$) {\mdf@digressiontitle~\theconcept\space: \space\mdf@mytitle };
+		\fi},
+	secondextra={%
+		\path let \p1=(P), \p2=(O) in (\x2,\y1) coordinate (Q);
+		\path [excursus arrow,round cap-]
+		($(O)+(5em,0ex)$) -| (Q);},
+	middleextra={%
+		\path let \p1=(P), \p2=(O) in (\x2,\y1) coordinate (Q);
+		\path [excursus arrow]
+		(O) -- (Q);},
+	middlelinewidth=2.5em,middlelinecolor=white,
+	hidealllines=true,topline=true,
+	innertopmargin=0.5ex,
+	innerbottommargin=2.5ex,
+	innerrightmargin=2pt,
+	innerleftmargin=2ex,
+	skipabove=0.87\baselineskip,
+	skipbelow=0.62\baselineskip,
+}
+\makeatother
+
+\newmdenv[style=digressionarrows,digressiontitle=Concept]{concept}
+
+
+
+
+% Python code inside mdframed
+
+
+
+% Python code inside mdframed
+% Concept and code only without result 
+% Similar to pycode environment 
+
+
+% Concept code 
+%Usage begin and end pycode environment {Title}{label}
+\newenvironment{conceptcode}[2]
+{%
+	\VerbatimEnvironment
+	\def\savedtitle{#1}%
+	\def\savedlabel{\label{#2}}%
+	\begin{concept}[mytitle=\savedtitle]%
+		\begin{center}
+		\begin{minipage}{.8\textwidth}%
+				\begin{python3code}%
+				}
+				{%
+				\end{python3code}%
+		\end{minipage}%
+		\end{center}%
+	\end{concept}%
+}
+
+
+\makeatletter
+\def\ProblemSpecBox{
+	\@ifnextchar[\ProblemSpecBox@opt{\ProblemSpecBox@noopt}}
+\def\ProblemSpecBox@opt[#1]#2{
+	\protected@edef\@currentlabelname{#1}
+	\protected@edef\@currentlabel{#1}
+	\begin{mdframed}[
+		innerlinewidth=0.5pt,
+		innerleftmargin=10pt,
+		innerrightmargin=10pt,
+		innertopmargin = 10pt,
+		innerbottommargin=10pt,
+		skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+		roundcorner=5pt,
+		frametitle={#2},
+		frametitlerule=true,
+		frametitlerulewidth=1pt]
+	}
+	\def\ProblemSpecBox@noopt#1{
+		\ProblemSpecBox@opt[#1]{#1}
+	}
+	\def\endProblemSpecBox{
+	\end{mdframed}
+}
+\makeatother
+
+
+
+
+
+
+%Concept and Code result
+
+% Usage \conceptandresult{title}{label}{codefile}{resultimagefile}
+\newcommand{\conceptandresult}[4]{
+	\begin{concept}[mytitle={#1}]
+		
+		\begin{minipage}{.45\linewidth}%
+			\inputminted[bgcolor=saffron!5,linenos=false, tabsize=4, frame = lines]{python3}{#3}
+		\end{minipage}\hfill%
+		\begin{minipage}{.45\linewidth}%
+			\includegraphics[width=\textwidth]{#4}
+		\end{minipage}
+	\end{concept}
+}
+
+

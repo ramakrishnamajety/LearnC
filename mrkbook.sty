@@ -1,0 +1,590 @@
+\ProvidesPackage{mrkbook}
+
+%This package is based on Memoir Class Please load this first using \documentclass{memoir}
+
+
+%\raggedbottomsection
+
+\makeatletter
+\def\nobreak{\penalty\@M}
+\makeatother
+
+
+
+\RequirePackage[table,svgnames]{xcolor}
+
+
+
+\definecolor{saffron}{rgb}{0.98, 0.3, 0.0}
+\definecolor{maroon}{rgb}{0.28, 0.02, 0.03}
+\definecolor{forestgreen}{rgb}{0.0, 0.5, 0.1}
+
+
+
+\renewcommand{\contentsname}{Table of Contents}
+\renewcommand{\listfigurename}{List of Figures}
+\renewcommand{\listtablename}{List of Tables}
+%\renewcommand*{\cftchapterleader}{\hfill}
+%\renewcommand*{\cftsectionleader}{\hfill}
+\renewcommand{\figurename}{\bfseries \small  Fig.}
+\captionnamefont{\small}
+\captiontitlefont{\small}
+%
+%
+%% MEMOIR LAYOUT
+%\setstocksize{7.875in}{4.875in}
+%\settrimmedsize{7.875in}{4.875in}{*}
+%\setlrmarginsandblock{.625in}{.75in}{*}
+%\setulmarginsandblock{.625in}{1.25in}{*}
+%
+%\checkandfixthelayout
+
+
+
+%Memoir Layout 
+
+\setstocksize{303mm}{216mm}
+\settrimmedsize{297mm}{210mm}{*}
+\settrims{3mm}{3mm}
+\setlrmarginsandblock{20mm}{15mm}{*}
+\setulmarginsandblock{20mm}{20mm}{*}
+\setheadfoot{\baselineskip}{7mm}
+\setlength\headsep{7mm}
+
+\checkandfixthelayout
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1.15\baselineskip}
+
+%\chapterstyle{demo3}
+%\chapterstyle{verville}
+%\chapterstyle{southhall}
+%\chapterstyle{thatcher}
+%\chapterstyle{wilsondob}
+%\chapterstyle{pedersen}
+%\chapterstyle{bianchi}
+\chapterstyle{ger}
+
+
+
+
+
+
+
+
+
+\addtopsmarks{headings}{%
+	\nouppercaseheads % added at the beginning
+}{%
+\createmark{subsection} {right}{shownumber}{}{. \space}
+\createmark{subsubsection}{right}{shownumber}{}{. \space}
+}%use the new settings
+\setlength{\headwidth}{\textwidth}
+
+\makeheadfootruleprefix{myruled}{\color{saffron}}{\color{saffron}}
+
+%\addtolength{\headwidth}{\marginparsep}
+%\addtolength{\headwidth}{\marginparwidth}
+\makeheadrule{headings}{\headwidth}{\normalrulethickness}
+
+
+\makerunningwidth{headings}{\headwidth}
+%\makefootrule{headings}{\headwidth}{\normalrulethickness}{\footruleskip}
+%\makeheadposition{headings}{flushright}{flushleft}{flushright}{flushleft}
+\makeheadposition{headings}{flushright}{flushleft}{}{}
+
+%
+%\makeevenfoot{headings}{\thepage\ / \thelastpage}{}{}
+%\makeoddfoot {headings}{}{}{\thepage\ / \thelastpage}
+%
+%\makeevenfoot{headings}{}{\thepage}{}
+%\makeoddfoot {headings}{}{\thepage}{}
+
+\setsecnumdepth{subsubsection} % activating subsubsec numbering in doc
+\setsecnumdepth{subparagraph} % activating subsubsec numbering in doc
+
+	
+\makeatletter % because of \@chapapp
+\makepsmarks{Ruled}{
+	
+	\nouppercaseheads
+	\makeheadfootruleprefix{Ruled}{\color{saffron}}{\color{saffron}}
+	\createmark{chapter}{both}{nonumber}{\@chapapp\ }{. \ }
+	\createmark{section}{right}{shownumber}{}{. \ }
+	\createmark{subsection}{right}{shownumber}{}{. \ }
+	\createmark{subsubsection}{right}{shownumber}{}{. \ }
+	\createplainmark{toc}{both}{\contentsname}
+	\createplainmark{lof}{both}{\listfigurename}
+	\createplainmark{lot}{both}{\listtablename}
+	\createplainmark{bib}{both}{\bibname}
+	\createplainmark{index}{both}{\indexname}
+	\createplainmark{glossary}{both}{\glossaryname}
+}
+\makeatother
+
+
+
+\pagestyle{headings}
+%\pagestyle{Ruled}
+
+
+
+
+
+\setsecnumdepth{section}
+\setFloatBlockFor{section}
+
+
+
+
+% Loading Packages. 
+
+
+\RequirePackage{import}
+
+
+
+\RequirePackage{multicol}
+\RequirePackage{enumitem}
+
+
+
+
+
+\RequirePackage{siunitx}
+
+\RequirePackage{amsfonts,amsmath,amssymb,amsthm}
+\RequirePackage{mathtools}
+\RequirePackage{mathrsfs}
+\RequirePackage{steinmetz}
+
+
+\RequirePackage{longtable}
+\RequirePackage{etoolbox}
+\RequirePackage{booktabs}
+\RequirePackage{tabularx}
+\RequirePackage{xstring}
+
+\RequirePackage{lipsum}
+
+
+%\RequirePackage{geometry}
+
+%\RequirePackage{libertine}
+%\RequirePackage[libertine]{newtxmath}
+%\RequirePackage{inconsolata}
+%\usepackage{fouriernc}
+%\usepackage{kmath,kerkis}
+\usepackage{kpfonts}
+%\usepackage[T1]{fontenc}
+% linespacing ~ 14pt
+%\linespread{1.1}
+%\linespread{1.17}
+%\usepackage{bookman}
+%\usepackage{cmbright}
+%\usepackage{libertine}
+%\usepackage[libertine]{newtxmath}
+%\usepackage{newtxtext,newtxmath}
+%\usepackage{tgtermes}\usepackage[lite]{mtpro2}
+%\usepackage{stix}
+%\usepackage{mathptmx}
+
+
+\OnehalfSpacing
+
+
+\RequirePackage{csquotes}
+
+
+
+
+
+
+\RequirePackage{tikz}
+
+
+\RequirePackage{graphicx}
+\RequirePackage{textcomp}
+\RequirePackage{pgfplots}
+
+\RequirePackage{tikz-3dplot}
+\usetikzlibrary{patterns}
+\usetikzlibrary{tikzmark}
+\usetikzlibrary{shapes}
+\usetikzlibrary{arrows}
+
+
+\usepgfplotslibrary{smithchart}
+
+\usepgfplotslibrary{polar}
+\usetikzlibrary{optics, intersections}
+
+
+%\pgfplotsset{compat=1.11}`
+
+%%%%%% Special Package karnaugh-map
+
+\RequirePackage{karnaugh-map}
+
+%%%%%%%  Definition needed for tikz circuit library.
+
+\usepackage{tikz}
+
+\usetikzlibrary{circuits.ee.IEC}
+\usetikzlibrary{circuits.logic.US}
+\usetikzlibrary{fit,positioning,arrows,matrix,fit,arrows,shapes}
+%%%%%%%%%  ADDVMARGIN Command
+\newcommand\addvmargin[1]{
+	\node[fit=(current bounding box),inner ysep=#1,inner xsep=0]{};
+}
+
+\tikzset{ac source/.style={
+		circuit symbol lines,
+		circuit symbol size = width 2 height 2,
+		shape = generic circle IEC,
+		/pgf/generic circle IEC/before background={
+			\pgfpathmoveto{\pgfpoint{-0.8pt}{0pt}}
+			\pgfpathsine{\pgfpoint{0.4pt}{0.4pt}}
+			\pgfpathcosine{\pgfpoint{0.4pt}{-0.4pt}}
+			\pgfpathsine{\pgfpoint{0.4pt}{-0.4pt}}
+			\pgfpathcosine{\pgfpoint{0.4pt}{0.4pt}}
+			\pgfusepath{stroke}
+		},
+		transform shape
+	}}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+%Ruler
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+%Lemma definition and lemma counter
+\newtheorem{lemma}{Lemma}[section]
+
+%Definition counter
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+%Corolary counter
+\newtheorem{corolary}{Corolary}[section]
+
+%Commands for naturals, integers, topology, hull, Ball, Disc, Dimension, boundary and a few more
+\newcommand{\E}{{\mathcal{E}}}
+\newcommand{\F}{{\mathcal{F}}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%  Contents for each Chapter
+
+\RequirePackage{shorttoc}
+\RequirePackage{titletoc}
+
+
+\newcommand\partialtocname{Topics in this Chapter}
+\newcommand\ToCrule{\noindent\rule[5pt]{\textwidth}{1.3pt}} 
+\newcommand\ToCtitle{{\large\bfseries\partialtocname}\vskip2pt\ToCrule}
+\makeatletter
+\newcommand\Mprintcontents{%
+	\ToCtitle
+	\ttl@printlist[chapters]{toc}{}{1}{}\par\nobreak
+	\ToCrule}
+\makeatother
+
+
+
+
+
+
+%For Placing Inspirational Quotes at the beginning of Chapter
+
+\epigraphfontsize{\small\itshape}
+\setlength\epigraphwidth{0.6\textwidth}
+\setlength\epigraphrule{0pt}
+
+\epigraphfontsize{\small\itshape}
+
+
+
+%%%%%%%%  Configure Answers Package 
+
+%%%%  Example and SOlution Environment. 
+
+\RequirePackage{morewrites}
+\RequirePackage{wrapfig}
+\RequirePackage{thmtools}
+\RequirePackage{answers}
+\RequirePackage{multicol}
+\RequirePackage{xassoccnt}
+
+
+\RequirePackage[framemethod=tikz]{mdframed}
+
+\declaretheoremstyle[
+headfont=\normalfont\bfseries,
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont,
+postheadspace=0.5em,
+mdframed={
+	skipabove=\topsep,
+	skipbelow=\topsep,
+	hidealllines=true,
+	leftline=true,
+	innerbottommargin=6pt,
+	linewidth=4pt,
+	linecolor=gray!90,
+	leftmargin=-14pt,
+	innertopmargin=0pt,
+	innerbottommargin=0pt,
+	innerrightmargin=0pt, 
+	backgroundcolor={black!10},
+	innerleftmargin=10pt,
+	innerrightmargin=10pt}
+]{exampleStyle}
+\declaretheorem[style=exampleStyle,name={Example}]{exml}
+\newenvironment{example}[0]
+{\begin{exml}}
+	{\end{exml}}
+
+%%  Proof like environment for Solution
+\newenvironment{solution}
+{\begin{proof}[Solution]}
+	{\end{proof}}
+
+
+
+\newmdenv[%
+leftmargin=5cm,
+backgroundcolor=saffron!10,%
+roundcorner=4pt,%
+tikzsetting={draw=saffron, line width=2.0pt}%
+]{deriveStyle}%
+
+
+\newenvironment{deriveBox}[1]
+{\mdfsetup{
+		frametitle={\colorbox{saffron!10}{\space#1\space}},
+		frametitlefont=\bfseries,
+		innertopmargin=5pt,
+	%	frametitleaboveskip=-\ht\strutbox,
+	%	frametitlealignment=\center,
+		leftmargin=5cm,
+		backgroundcolor=saffron!10,%
+		roundcorner=2pt,
+		tikzsetting={draw=black!10!saffron, line width=1.0pt}%
+		}%
+	\begin{mdframed}%
+	}
+	{\end{mdframed}}
+
+
+\newenvironment{noteBox}[1]{%
+	\mdfsetup{%
+		frametitle={\tikz\node[fill=white,rectangle,inner sep=0pt,outer sep=0pt]{\,#1\,};},
+		frametitleaboveskip=-1.25\ht\strutbox,
+		frametitlealignment=\raggedright,
+		backgroundcolor=saffron!5,%
+		frametitle={\colorbox{white}{\space#1\space}},
+		innertopmargin=10pt,
+		frametitleaboveskip=-\ht\strutbox,
+		frametitlealignment=\center,
+		roundcorner=2pt,%
+		linecolor=saffron,linewidth=2pt,%
+		leftmargin=1cm,rightmargin=1cm,
+	}%
+	\begin{mdframed}%[style=exampledefault]
+	}{\end{mdframed}}
+
+
+
+
+
+
+
+
+%%%%%%  Other Required packages 
+\RequirePackage{physics}
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%% Place at the End of Preamble
+
+\usepackage[colorlinks]{hyperref}
+
+
+
+
+
+\definecolor{winered}{rgb}{0.5,0,0}
+
+\hypersetup
+{
+	pdfauthor={Sri Heramba Education Tech},
+	pdfsubject={Software Development Technologies},
+	pdftitle={Learn Python 3},
+	pdfkeywords={Python, OOP},
+	%    colorlinks=false,
+	pdfborder={0 0 0},
+	%You can set individual colors for links as below:
+	colorlinks=true,
+	linkcolor={winered},
+	urlcolor={winered},
+	filecolor={winered},
+	citecolor={winered},
+	allcolors={winered},
+	linktoc=all,
+}
+
+
+
+
+\RequirePackage[nameinlink]{cleveref}
+
+\RequirePackage[acronym]{glossaries}
+\makeglossaries
+
+
+\RequirePackage{chngcntr}
+\counterwithin*{chapter}{part}
+
+
+
+
+
+
+
+
+%%%%%%%% Fullstop after Abbreviation ie etc etc. 
+
+\usepackage{xspace}
+
+% Add a period to the end of an abbreviation unless there's one
+% already, then \xspace.
+\makeatletter
+\DeclareRobustCommand\onedot{\futurelet\@let@token\@onedot}
+\def\@onedot{\ifx\@let@token.\else.\null\fi\xspace}
+
+\def\eg{\emph{e.g}\onedot} 
+\def\Eg{\emph{E.g}\onedot}
+\def\ie{\emph{i.e}\onedot} 
+\def\Ie{\emph{I.e}\onedot}
+\def\cf{\emph{c.f}\onedot} 
+\def\Cf{\emph{C.f}\onedot}
+\def\etc{{etc}\onedot} 
+\def\vs{\emph{vs}\onedot}
+\def\wrt{w.r.t\onedot} 
+\def\dof{d.o.f\onedot}
+\def\etal{\emph{et al}\onedot}
+\makeatother
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%% Defining Multiple Choice environment with horizontal Counting
+
+
+\newlist{choices}{enumerate}{1}
+\setlist[choices]{label*=\alph*)}
+\newcommand{\choice}{\item}
+
+\SetEnumitemKey{twocol}{
+	before=\raggedcolumns\begin{multicols}{2},
+		after=\end{multicols}}
+
+
+
+\SetEnumitemKey{threecol}{
+	before=\raggedcolumns\begin{multicols}{3},
+		after=\end{multicols}}
+
+
+\SetEnumitemKey{fourcol}{
+	before=\raggedcolumns\begin{multicols}{4},
+		after=\end{multicols}}
+
+
+%%%%%  Enumerated description list 
+
+
+
+
+% use tasks v0.10 2014/07/20:
+\usepackage{tasks}
+%To check the error Command \checkmark already defined. \newcommand{\checkmark}{\dingbat@sym{'104}}
+\usepackage{savesym}
+\savesymbol{checkmark}
+\usepackage{dingbat}
+
+
+
+
+
+%%%%%%%%%  Declaring Math Operators
+
+\DeclareMathOperator{\sinc}{sinc}
+
+				
+				
+
+
+
+%\OnehalfSpacing
+
+%%%% Common Definitions
+
+\tikzstyle{branch}=[fill,shape=circle,minimum size=2pt,inner sep=0pt]
+
+
+
+\usepackage{imakeidx}
+%\makeindex
+\makeindex[columns=3, title=Alphabetical Index]
+
+\newcommand{\addtoindex}[1]{#1\index{#1}}
+

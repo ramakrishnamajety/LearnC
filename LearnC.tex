@@ -1,0 +1,195 @@
+% !TeX document-id = {ce6a6305-c220-44d9-b7e3-764a668089f2}
+% !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
+
+\documentclass[10pt,a4paper]{memoir}
+
+
+\usepackage{import,mrkbook}
+\input{pythondefs.tex}
+
+
+
+
+
+
+\begin{document}
+
+	\title{{\bfseries Om Jaya Ganesa }\\ Learn C }
+	\author{Manjunath Sarma Majety}
+	\maketitle
+	
+	
+	\newpage
+
+	\begin{KeepFromToc}
+		\tableofcontents
+	\end{KeepFromToc}
+
+	\clearpage
+	\listofprograms
+	\clearpage
+	\listoffigures
+	\clearpage
+
+\frontmatter
+
+
+	\import{./LearnCFiles/chapters/}{preface.tex}
+
+
+\mainmatter
+	\import{./LearnCFiles/chapters/}{intro.tex}
+%	\import{./pythonBookFiles/chapters/}{datatypes.tex}
+%	\import{./pythonBookFiles/chapters/}{numbers.tex}
+%	\import{./pythonBookFiles/chapters/}{strings.tex}
+%	\import{./pythonBookFiles/chapters/}{operators.tex}
+%	\import{./pythonBookFiles/chapters/}{flowcontrol.tex}
+
+
+
+
+
+
+\chapter{Test for gitting }
+
+
+
+\section{Delete after completing the book}
+
+
+\section{Another environment with purely minted }
+
+
+
+
+\begin{pycode}{Hello World Program}{helloworld}
+
+
+def lcs(u, v):
+"""Return c where c[i][j] contains length of LCS of u[i:] and v[j:]."""
+c = [[-1]*(len(v) + 1) for _ in range(len(u) + 1)]
+lcs_helper(u, v, c, 0, 0)
+return c
+
+
+def lcs_helper(u, v, c, i, j):
+"""Return length of LCS of u[i:] and v[j:] and fill in table c.
+
+c[i][j] contains the length of LCS of u[i:] and v[j:].
+print('Longest Common Subsequence: ', end='')
+print_lcs(u, v, c)
+
+\end{pycode}
+
+
+
+Till Now what we learnt 
+
+\begin{summary}
+	
+	\begin{description}
+		\item [IDLE] This is a light weight IDE for writing Python programs. 
+		\item [REPL] Interactive mode Python interpreted which gives a prompt like this \mint{python}{>>>}
+		\item []
+	\end{description}
+	
+	
+\end{summary}
+
+
+
+%\conceptandresult{Strings - Multiline text and index errors}{stringmethods}{pythonBookFiles/scripts/strings/stringmethods.py}{pythonBookFiles/images/strings/stringmethods}
+
+
+
+
+
+
+\begin{project}{title of the project}{proj1}
+
+
+\lipsum
+
+\end{project}
+
+
+
+
+
+\begin{tipbox}
+	\lipsum
+\end{tipbox}
+
+
+\begin{mytheorem}{Title of the blue box}
+	
+	\lipsum
+	\lipsum
+	
+\end{mytheorem}
+
+%Usage sourcefile{Title}{label}{filename}
+
+
+
+%\pycodefile{Title of the program}{onetwothree}{pythonBookFiles/scripts/intro/hello.py}
+
+%\pycoderesultfiles{Title of the program}{onetwothree}{hello.py}{pythonBookFiles/images/intro/ubuntuinstall}
+
+
+
+\begin{concept}[mytitle={Pythagorean Theorem }]
+	
+	Hello World and 
+	
+	another some 
+	
+	text 
+	for explaining the concept 
+	
+	
+\end{concept}
+
+
+
+\begin{noteBox}{hello world}
+	content...
+\end{noteBox}
+
+
+
+\backmatter
+
+%	\import{./pythonBookFiles/chapters/}{pep8.tex}
+%	\import{./pythonBookFiles/chapters/}{postscript.tex}
+
+
+
+% the question
+\renewenvironment{mySoln}[1]{%
+	% add some glue
+	\vskip .5cm plus 2cm minus 0.1cm%
+	{\bfseries \hyperlink{question:#1}{#1.}}%
+}%
+{%
+}%
+
+
+
+
+
+\chapter{Solutions to the Exercises}
+
+\input{\jobname sol1}
+\clearpage
+%\input{\jobname sol2}
+\clearpage
+
+%\input{\jobname sol3}
+\clearpage
+
+%\input{\jobname sol4}
+\clearpage
+\printindex
+
+\end{document}
